@@ -1,0 +1,21 @@
+# --- Ignorar basura de Visual Studio ---
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# --- Ignorar carpetas de compilación (Binarios) ---
+bin/
+obj/
+Debug/
+Release/
+
+# --- Ignorar archivos de paquetes y temporales ---
+packages/
+*.lock.json
+*.db
+*.db-shm
+*.db-wal
+appsettings.Development.json
