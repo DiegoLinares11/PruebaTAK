@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BackendApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BackendApi.Context
 {
@@ -6,7 +7,9 @@ namespace BackendApi.Context
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-        }
+    }
+        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Contacto> Contactos { get; set; }
 
     }
 }
