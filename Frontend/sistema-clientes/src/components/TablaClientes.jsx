@@ -26,17 +26,13 @@ const TablaClientes = () => {
     const [listaContactos, setListaContactos] = useState([]);
     const [clienteSeleccionado, setClienteSeleccionado] = useState(null);
 
-    // 🔴 REVISA TUS PUERTOS (7082 o 7282 según tu Swagger)
     const URL_API = "https://localhost:7282/api/Clientes"; 
     const URL_AUTH = "https://localhost:7282/api/Auth";
 
-    // ✅ NUEVO: EXPRESIONES REGULARES (VALIDACIONES)
     const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
     const regexTelefono = /^\d{4}-?\d{4}$/; // 8 dígitos (ej. 55555555 o 5555-5555)
 
-    // ==========================================
     // LÓGICA DE CLIENTES (TABLA)
-    // ==========================================
     const getClientes = async () => {
         try {
             const response = await axios.get(URL_API);
@@ -52,9 +48,7 @@ const TablaClientes = () => {
         } catch (error) { Swal.fire('No encontrado', 'ID no existe', 'warning'); getClientes(); }
     };
 
-    // ==========================================
     // LÓGICA DE SEGURIDAD (JWT)
-    // ==========================================
     const generarToken = async () => {
         try {
             const response = await axios.get(`${URL_AUTH}/GenerarToken`);
@@ -91,9 +85,7 @@ const TablaClientes = () => {
     }, [tabActual]);
 
 
-    // ==========================================
     // LÓGICA CRUD + VALIDACIONES
-    // ==========================================
     const handleChange = (e) => { const { name, value } = e.target; setForm({ ...form, [name]: value }); };
     
     const handleContactoChange = (index, e) => {
@@ -113,7 +105,7 @@ const TablaClientes = () => {
         setShowModal(true);
     };
 
-    // ✅ NUEVO: FUNCIÓN DE VALIDACIÓN
+    //FUNCIÓN DE VALIDACIÓN
     const validarFormulario = () => {
         // 1. Validar Cliente (Papá)
         if (!form.nombreCliente || !form.identificador) { Swal.fire('Atención', 'Nombre y NIT son obligatorios', 'warning'); return false; }
@@ -131,7 +123,7 @@ const TablaClientes = () => {
     };
 
     const guardarCambios = async () => {
-        // ✅ NUEVO: EJECUTAR VALIDACIÓN ANTES DE ENVIAR
+        // EJECUTAR VALIDACIÓN ANTES DE ENVIAR
         if (!validarFormulario()) return; 
 
         try {
@@ -149,9 +141,7 @@ const TablaClientes = () => {
 
     const verContactos = (c) => { setClienteSeleccionado(c); setListaContactos(c.contactos || []); setShowModalContactos(true); };
 
-    // ==========================================
     // RENDERIZADO (UI CON TABS)
-    // ==========================================
     return (
         <div className="container mt-5">
             <div className="d-flex justify-content-between align-items-center mb-4">
