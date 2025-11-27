@@ -51,5 +51,22 @@ namespace BackendApi.Controllers
         {
             return Ok("El token es válido y estás autorizado. ✅");
         }
+
+        // Endpoint VIP: Solo entra quien tenga Token válido
+        [HttpGet("ResumenConfidencial")]
+        [Authorize] 
+        public IActionResult ObtenerDatosSensibles()
+        {
+            // Simulamos datos que solo un Gerente debería ver
+            var datos = new
+            {
+                IngresosMensuales = 150000.50,
+                ClientesNuevos = 12,
+                TicketsPendientes = 5,
+                MensajeSecreto = "La clave de la caja fuerte es: TAK-2025"
+            };
+
+            return Ok(datos);
+        }
     }
 }
