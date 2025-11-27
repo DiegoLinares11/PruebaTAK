@@ -46,6 +46,10 @@ namespace BackendApi.Controllers
         public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
         {
             //  Si el JSON trae contactos, los guarda en la tabla Contactos automáticamente
+            cliente.FechaCreacion = DateTime.Now;
+
+            // Si la lista de contactos viene nula, la inicializamos vacía para evitar errores
+            if (cliente.Contactos == null) cliente.Contactos = new List<Contacto>();
             _context.Clientes.Add(cliente);
             await _context.SaveChangesAsync();
 
@@ -77,9 +81,20 @@ namespace BackendApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCliente(int id)
         {
-            var cliente = await _context.Clientes.FindAsync(id);
+            //  Buscamos al cliente INCLUYENDO sus contactos
+            var cliente = await _context.Clientes
+                                        .Include(c => c.Contactos) 
+                                        .FirstOrDefaultAsync(c => c.ClienteId == id);
+
             if (cliente == null) return NotFound();
 
+            // Si tiene contactos, los borramos primero manualmente
+            if (cliente.Contactos != null && cliente.Contactos.Count > 0)
+            {
+                _context.Contactos.RemoveRange(cliente.Contactos);
+            }
+
+            //Ahora sí, borramos al papá libremente
             _context.Clientes.Remove(cliente);
             await _context.SaveChangesAsync();
 
