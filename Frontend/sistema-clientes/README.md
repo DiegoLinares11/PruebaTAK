@@ -1,16 +1,66 @@
-# React + Vite
+### Frontend — Prueba Técnica Corporación TAK
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto corresponde al frontend del sistema de gestión de clientes desarrollado como parte de la prueba técnica para Corporación TAK.
 
-Currently, two official plugins are available:
+Este se refactorizo ya que tenia tiempo entonces me ayude de lovable para hacer un frontend mejor. Para ver la version hecha por mi a manita se puede retroceder un commit :)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Está construido con:
 
-## React Compiler
+React + TypeScript
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Vite
 
-## Expanding the ESLint configuration
+Tailwind CSS
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+shadcn/ui
+
+Axios para comunicación con la API
+
+### Requisitos previos
+
+Asegúrate de tener instalado:
+
+* Node.js (versión recomendada: 18+)
+
+* npm (incluido con Node)
+
+Puedes verificarlo con:
+```bash
+node -v
+npm -v
+
+```
+### Instalación y ejecución
+
+Clona el repositorio e instala las dependencias:
+
+```bash
+git clone https://github.com/DiegoLinares11/PruebaTAK
+cd frontend/sistema-clientes
+npm install
+```
+Inicia el servidor de desarrollo:
+
+```bash
+npm run dev
+```
+
+El proyecto quedará disponible en:
+```bash
+http://localhost:8080
+```
+
+### Conexión con el backend
+
+El frontend consume la API .NET que expone los endpoints:
+
+```
+https://localhost:7282/api/Clientes
+https://localhost:7282/api/Auth
+```
+Asegúrate de:
+
+1. Tener la API corriendo.
+
+2. Actualizar las constantes URL_API y URL_AUTH en el componente que lo requiera.
+
